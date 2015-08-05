@@ -4,8 +4,11 @@ set -euo pipefail
 
 export ROOT=$(cd $(dirname $0) && pwd)
 
-SCRIPT=${1:-curate}
-shift
+SCRIPT=${ACTION:-}
+[ -z "${SCRIPT}" ] && {
+  SCRIPT=${1:-curate}
+  shift
+}
 
 [ -x "/home/curator/cmd_${SCRIPT}.sh" ] || {
   echo "Unrecognized command: ${SCRIPT}" >&2
