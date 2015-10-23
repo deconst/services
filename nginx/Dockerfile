@@ -7,7 +7,8 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log
 RUN ln -sf /dev/stderr /var/log/nginx/error.log
 
 RUN mkdir -p /var/cache/nginx/
-RUN chown -R :www-data /var/lib/nginx/tmp/ /var/cache/nginx/
+RUN adduser -D -s /bin/sh -G www-data www-data
+RUN chown -R www-data:www-data /var/lib/nginx/tmp/ /var/cache/nginx/
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
