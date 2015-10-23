@@ -6,9 +6,11 @@ RUN apk add --update nginx && rm -rf /var/cache/apk/*
 RUN ln -sf /dev/stdout /var/log/nginx/access.log
 RUN ln -sf /dev/stderr /var/log/nginx/error.log
 
+RUN adduser -D -s /bin/sh www-data
+RUN chown -R www-data:www-data /var/lib/nginx/tmp/ /var/cache/nginx/
+
 COPY nginx.conf /etc/nginx/nginx.conf
 
-VOLUME ["/var/cache/nginx"]
 VOLUME ["/var/ssl"]
 EXPOSE 80 443
 
