@@ -1,5 +1,4 @@
 var walk = require('walk');
-var dockerode = require('dockerode');
 var request = require('request');
 
 var logger = require('./logger');
