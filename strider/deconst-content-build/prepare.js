@@ -59,22 +59,46 @@ var choosePreparer = function (state) {
 
 var createPreparerContainer = function (state) {
   return function (callback) {
-
+    docker.createContainer({
+      Image: state.preparer,
+      Env: [
+        "CONTENT_STORE_URL=",
+        "CONTENT_STORE_APIKEY=",
+        "TRAVIS_PULL_REQUEST=false"
+      ]
+    }, function (err, container) {
+      state.container = container;
+      callback(err);
+    });
   };
 };
 
 var startPreparerContainer = function (state) {
   return function (callback) {
+    state.container.start(callback);
+  };
+};
 
+var waitForCompletion = function (state) {
+  return function (callback) {
+    state.container.wait(function (err, result) {
+      state.status = result.StatusCode;
+      callback(null);
+    });
   };
 };
 
 exports.prepare = function (root, callback) {
   var state = {
-    root: root
+    root: root,
+    container: null,
+    status: 0
   };
 
-  async.waterfall([
-
+  async.series([
+    choosePreparer(state),
+    createPreparerContainer(state),
+    startPreparerContainer(state),
+    waitForCompletion(state)
   ], callback);
 };
