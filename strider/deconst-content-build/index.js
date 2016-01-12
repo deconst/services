@@ -4,6 +4,8 @@ var request = require('request');
 var logger = require('./logger');
 var prepare = require('./prepare');
 
+prepare.connect();
+
 // walk the filesystem from . to find directories that contain a _deconst.json file.
 var options = {
   followLinks: false,
