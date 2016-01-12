@@ -93,13 +93,32 @@ var pullPreparerContainer = function (state) {
 
 var createPreparerContainer = function (state) {
   return function (callback) {
+    var contentStoreURL = process.env.CONTENT_STORE_URL || '';
+    var contentStoreKey = process.env.CONTENT_STORE_APIKEY || '';
+
+    var volumeRoot = process.env.CONTENT_VOLUME_ROOT || path.join(process.cwd(), state.root);
+    var containerPath = "/usr/content-repo";
+
+    var bind = volumeRoot + ":" + containerPath;
+
     var params = {
       Image: state.preparer,
       Env: [
-        "CONTENT_STORE_URL=" + (process.env.CONTENT_STORE_URL || ''),
-        "CONTENT_STORE_APIKEY=" + (process.env.CONTENT_STORE_APIKEY || ''),
+        "CONTENT_STORE_URL=" + contentStoreURL,
+        "CONTENT_STORE_APIKEY=" + contentStoreKey,
         "TRAVIS_PULL_REQUEST=false"
-      ]
+      ],
+      Mounts: [
+        {
+          Source: volumeRoot,
+          Destination: containerPath,
+          Mode: "rw",
+          RW: true
+        }
+      ],
+      HostConfig: {
+        Binds: [bind]
+      }
     };
 
     logger.debug("Creating preparer container.", params);
