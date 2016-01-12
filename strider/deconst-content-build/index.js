@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var walk = require('walk');
 var request = require('request');
 
