@@ -179,13 +179,13 @@ exports.prepare = function (root, callback) {
   ], function (err) {
     if (err) {
       logger.error("Preparer completed with an error.", err);
-      return callback(err);
+      return callback(err, false);
     }
 
     logger.info("Preparer completed.", {
       status: state.status
     });
 
-    callback(null);
+    callback(null, state.status === 0);
   });
 };

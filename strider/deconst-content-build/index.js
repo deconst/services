@@ -11,6 +11,9 @@ var options = {
   followLinks: false,
 };
 
+var atLeastOne = false;
+var allSuccessful = true;
+
 walker = walk.walk(".", options);
 
 walker.on('directories', function (root, stats, callback) {
@@ -35,9 +38,16 @@ walker.on('files', function (root, stats, callback) {
   if (hasContent) {
     logger.info('Deconst content directory: %s', root);
 
-    prepare.prepare(root, callback);
+    prepare.prepare(root, function (err, success) {
+      atLeastOne = true;
+
+      if (err) return callback(err);
+
+      allSuccessful = allSuccessful && success;
+      callback(null);
+    });
   } else {
-    callback();
+    callback(null);
   }
 });
 
@@ -51,4 +61,17 @@ walker.on('errors', function (root, stats, callback) {
 
 walker.on('end', function () {
   logger.debug('Walk completed');
+
+  if (!atLeastOne) {
+    logger.error("No preparable content discovered.");
+    logger.error("Please add a _deconst.json file to each root directory where content is located.");
+
+    process.exit(1);
+  }
+
+  if (!allSuccessful) {
+    logger.error("At least one preparer run terminated unsuccessfully.");
+
+    process.exit(1);
+  }
 });
