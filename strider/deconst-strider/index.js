@@ -1,8 +1,11 @@
 #!/usr/bin/env node
 
+var path = require('path');
 var strider = require('strider');
 
-strider(__dirname, {}, function (err, initialized, appInstance) {
+var extPath = path.join(__dirname, "node_modules");
+
+strider(extPath, {}, function (err, initialized, appInstance) {
   if (err) {
     console.error(err);
     return;

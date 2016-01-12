@@ -13,6 +13,16 @@
   "license": "MIT",
   "dependencies": {
     "strider": "^1.7.5",
-    "strider-github-auth": "^1.0.1"
+    "strider-build-badge": "^0.1.0",
+    "strider-cli": "^1.4.10",
+    "strider-custom": "^0.6.0",
+    "strider-email-notifier": "^0.4.2",
+    "strider-env": "^0.5.1",
+    "strider-git": "^0.2.4",
+    "strider-github": "^2.1.2",
+    "strider-github-auth": "^1.0.1",
+    "strider-github-status": "^1.0.0",
+    "strider-simple-runner": "^0.13.1",
+    "strider-slack": "^2.0.0"
   }
 }
