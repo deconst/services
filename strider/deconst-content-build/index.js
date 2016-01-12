@@ -43,7 +43,10 @@ walker.on('files', function (root, stats, callback) {
     prepare.prepare(root, function (err, success) {
       atLeastOne = true;
 
-      if (err) return callback(err);
+      if (err) {
+        allSuccessful = false;
+        return callback(err);
+      }
 
       allSuccessful = allSuccessful && success;
       callback(null);
