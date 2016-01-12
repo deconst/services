@@ -21,4 +21,4 @@ WORKDIR /home/strider
 USER strider
 ENV HOME /home/strider
 
-ENTRYPOINT ["/usr/bin/node", "/home/strider/deconst-strider/index.js"]
+ENTRYPOINT ["/usr/bin/deconst-strider"]
