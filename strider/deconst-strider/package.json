@@ -1,0 +1,18 @@
+{
+  "name": "deconst-strider",
+  "version": "1.0.0",
+  "description": "Custom packaging of Strider CD.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "deconst-strider": "./index.js"
+  },
+  "author": "Ash Wilson <ash.wilson@rackspace.com>",
+  "license": "MIT",
+  "dependencies": {
+    "strider": "^1.7.5",
+    "strider-github-auth": "^1.0.1"
+  }
+}
