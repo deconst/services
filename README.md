@@ -23,3 +23,9 @@ docker run -d \
   --link presenter:presenter \
   quay.io/deconst/nginx
 ```
+
+## Strider
+
+[![Docker Repository on Quay.io](https://quay.io/repository/deconst/strider/status "Docker Repository on Quay.io")](https://quay.io/repository/deconst/strider)
+
+This image bundles [Strider CD](https://github.com/Strider-CD/strider) with a controlled set of plugins and build scripts that can build content and control repositories.
