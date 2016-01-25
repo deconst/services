@@ -4,14 +4,11 @@ RUN apk add --update nodejs python-dev build-base krb5-dev \
   && rm -rf /var/cache/apk/*
 
 RUN adduser -D -g "" strider
-RUN mkdir -p /home/strider/ /var/workspace/
+RUN mkdir -p /home/strider/ /workspace/
 
-RUN chown -R strider:strider /home/strider/ /var/workspace/
+RUN chown -R strider:strider /home/strider/ /workspace/
 
-ADD deconst-content-build /home/strider/deconst-content-build
-RUN npm install -g /home/strider/deconst-content-build
-
-ENV STRIDER_CLONE_DEST /var/workspace/
+ENV STRIDER_CLONE_DEST /workspace/
 
 ADD deconst-strider /home/strider/deconst-strider
 RUN npm install -g /home/strider/deconst-strider
