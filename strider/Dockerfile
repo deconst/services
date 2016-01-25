@@ -7,15 +7,16 @@ RUN adduser -D -g "" strider
 RUN mkdir -p /home/strider/ /workspace/
 
 RUN chown -R strider:strider /home/strider/ /workspace/
+WORKDIR /home/strider/deconst-strider
 
-ENV STRIDER_CLONE_DEST /workspace/
-
-ADD deconst-strider /home/strider/deconst-strider
-RUN npm install -g /home/strider/deconst-strider
+ADD deconst-strider/package.json /home/strider/deconst-strider/package.json
+RUN npm install
+ADD deconst-strider/ /home/strider/deconst-strider/
 
 EXPOSE 3000
-WORKDIR /home/strider
 USER strider
-ENV HOME /home/strider
 
-ENTRYPOINT ["/usr/bin/deconst-strider"]
+ENV HOME /home/strider
+ENV STRIDER_CLONE_DEST /workspace/
+
+ENTRYPOINT ["node", "/home/strider/deconst-strider/index.js"]
