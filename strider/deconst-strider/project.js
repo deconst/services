@@ -1,3 +1,4 @@
+var async = require('async');
 var keypair = require('ssh-keypair');
 var request = require('request');
 
@@ -9,22 +10,30 @@ var logger = require('strider/lib/logging');
 var common = require('strider/lib/common');
 
 var Project = models.Project;
-var systemUser = user.systemUser;
 
 exports.createControlProject = function (callback) {
   var m = /github\.com\/([^/.]+)\/([^/.]+)/.exec(config.controlRepositoryURL);
   if (!m) {
-    logger.warning("The control repository %s does not appear to be on GitHub.", config.controlRepositoryURL);
+    logger.warn("The control repository %s does not appear to be on GitHub.", config.controlRepositoryURL);
 
     return callback(null);
   }
 
-  var rawProjectName = decodeURIComponent(m[0]) + "/" + decodeURIComponent(m[1]);
-  var projectName = projectName.toLowerCase().replace(/ /g, '-');
+  var rawProjectName = decodeURIComponent(m[1]) + "/" + decodeURIComponent(m[2]);
+  var projectName = rawProjectName.toLowerCase().replace(/ /g, '-');
 
-  var githubAccount = systemUser.accounts.some(function (each) {
-    return each.provider === 'github';
-  });
+  var systemUser = user.systemUser;
+  var githubAccount = null;
+
+  for (var i = 0; i < systemUser.accounts.length; i++) {
+    if (systemUser.accounts[i].provider === 'github') {
+      githubAccount = systemUser.accounts[i];
+    }
+  }
+
+  if (!githubAccount) {
+    return callback(new Error("System user is not connected to GitHub"));
+  }
 
   var state = {
     githubProject: null,
@@ -54,7 +63,14 @@ exports.createControlProject = function (callback) {
     }, function (err, resp, body) {
       if (err) return cb(err);
 
+      if (resp.statusCode !== 200) {
+        logger.error("Unsuccessful response from GitHub API: %s", resp.statusCode, body);
+
+        return cb(new Error("Unable to retrieve repository information from GitHub"));
+      }
+
       state.githubProject = body;
+
       cb(null);
     });
   };
@@ -152,8 +168,7 @@ exports.createControlProject = function (callback) {
     logger.debug("Setting up GitHub provider plugin for %s.", projectName);
 
     var githubProviderPlugin = common.extensions.provider.github;
-
-    githubProviderPlugin.webapp.setupRepo(githubAccount.config, provider.config, projectAttrs, function (err, config) {
+    githubProviderPlugin.setupRepo(githubAccount.config, provider.config, projectAttrs, function (err, config) {
       if (err) return cb(err);
 
       projectAttrs.provider.config = config;

@@ -31,7 +31,12 @@ exports.createSystemUser = function (callback) {
     User.find({ email: email }, function (err, results) {
       if (err) return cb(err);
 
-      cb(null, results.length > 0);
+      if (results.length > 0) {
+        exports.systemUser = results[0];
+        cb(null, true);
+      } else {
+        cb(null, false);
+      }
     });
   };
 
