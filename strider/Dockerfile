@@ -1,6 +1,6 @@
 FROM alpine:3.2
 
-RUN apk add --update nodejs python-dev build-base krb5-dev \
+RUN apk add --update nodejs python-dev build-base krb5-dev openssh-client \
   && rm -rf /var/cache/apk/*
 
 RUN adduser -D -g "" strider
