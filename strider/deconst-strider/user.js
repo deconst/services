@@ -1,9 +1,11 @@
-var async = require('async');
 var crypto = require('crypto');
-var config = require('./config');
 
+var async = require('async');
+var request = require('request');
 var models = require('strider/lib/models');
-var logger = require('strider/lib/logging').logger;
+var logger = require('strider/lib/logging');
+
+var config = require('./config');
 
 var User = models.User;
 

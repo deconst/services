@@ -3,7 +3,7 @@
 var path = require('path');
 var async = require('async');
 var strider = require('strider');
-var logger = require('strider/lib/logger').logger;
+var logger = require('strider/lib/logging');
 
 var user = require('./user');
 var project = require('./project');
