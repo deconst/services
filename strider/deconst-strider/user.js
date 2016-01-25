@@ -62,15 +62,15 @@ exports.createSystemUser = function (callback) {
     user.projects = [];
     user.accounts = [{
       provider: 'github',
-      id: githubProfile.id,
-      display_url: githubProfile.profileUrl,
-      title: githubProfile.username,
+      id: state.githubProfile.id,
+      display_url: state.githubProfile.html_url,
+      title: state.githubProfile.login,
       config: {
         accessToken: config.githubToken,
-        login: githubProfile.username,
+        login: state.githubProfile.login,
         email: email,
-        gravatarId: githubProfile._json.gravatar.id,
-        name: githuhProfile.displayName
+        gravatarId: state.githubProfile.gravatar_id,
+        name: state.githubProfile.login
       },
       cache: []
     }];
