@@ -1,22 +1,19 @@
 FROM alpine:3.2
 
-RUN apk add --update nodejs python-dev build-base krb5-dev openssh-client \
+RUN apk add --update nodejs python-dev build-base krb5-dev openssh-client git perl \
   && rm -rf /var/cache/apk/*
 
-RUN adduser -D -g "" -u 1000 strider
-RUN mkdir -p /home/strider/ /workspace/
+RUN mkdir -p /strider/ /workspace/
 
-RUN chown -R strider:strider /home/strider/ /workspace/
-WORKDIR /home/strider/deconst-strider
+WORKDIR /strider/deconst-strider/
 
-ADD deconst-strider/package.json /home/strider/deconst-strider/package.json
+ADD deconst-strider/package.json /strider/deconst-strider/package.json
 RUN npm install
-ADD deconst-strider/ /home/strider/deconst-strider/
+ADD deconst-strider/ /strider/deconst-strider/
 
 EXPOSE 3000
-USER strider
 
-ENV HOME /home/strider
+ENV HOME /strider
 ENV STRIDER_CLONE_DEST /workspace/
 
-ENTRYPOINT ["node", "/home/strider/deconst-strider/index.js"]
+ENTRYPOINT ["node", "/strider/deconst-strider/index.js"]
