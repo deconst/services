@@ -3,7 +3,7 @@ FROM alpine:3.2
 RUN apk add --update nodejs python-dev build-base krb5-dev openssh-client \
   && rm -rf /var/cache/apk/*
 
-RUN adduser -D -g "" -u 1010 strider
+RUN adduser -D -g "" -u 1000 strider
 RUN mkdir -p /home/strider/ /workspace/
 
 RUN chown -R strider:strider /home/strider/ /workspace/
