@@ -24,6 +24,19 @@ docker run -d \
   quay.io/deconst/nginx-pod
 ```
 
+## Nginx (Build)
+
+[![Docker Repository on Quay.io](https://quay.io/repository/deconst/nginx-build/status "Docker Repository on Quay.io")](https://quay.io/repository/deconst/nginx-build)
+
+Another [nginx](http://nginx.org/en/docs/) server that proxies requests to a Strider container.
+
+```bash
+docker run -d \
+  --volume /my-certs/:/var/ssl:ro \
+  --link strider:strider \
+  quay.io/deconst/nginx-build
+```
+
 ## Strider
 
 [![Docker Repository on Quay.io](https://quay.io/repository/deconst/strider/status "Docker Repository on Quay.io")](https://quay.io/repository/deconst/strider)
