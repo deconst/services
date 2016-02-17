@@ -10,9 +10,9 @@ This repository is home to the Dockerfiles for deconst services that aren't used
 
 This image bundles [Elasticsearch Curator](https://www.elastic.co/guide/en/elasticsearch/client/curator/current/index.html) and some utility scripts to quickly prune old Elasticsearch indexes.
 
-## Nginx
+## Nginx (Pod)
 
-[![Docker Repository on Quay.io](https://quay.io/repository/deconst/nginx/status "Docker Repository on Quay.io")](https://quay.io/repository/deconst/nginx)
+[![Docker Repository on Quay.io](https://quay.io/repository/deconst/nginx-pod/status "Docker Repository on Quay.io")](https://quay.io/repository/deconst/nginx-pod)
 
 An [nginx](http://nginx.org/en/docs/) server configured to proxy requests to a presenter and content service within a pod.
 
@@ -21,7 +21,7 @@ docker run -d \
   --volume /my-certs/:/var/ssl:ro \
   --link content:content \
   --link presenter:presenter \
-  quay.io/deconst/nginx
+  quay.io/deconst/nginx-pod
 ```
 
 ## Strider
