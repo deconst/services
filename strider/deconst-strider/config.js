@@ -13,6 +13,11 @@ exports.githubAPIEndpoint = withoutTrailingSlash(process.env.GITHUB_API_ENDPOINT
 
 exports.contentServiceURL = process.env.CONTENT_SERVICE_URL;
 exports.adminAPIKey = process.env.ADMIN_API_KEY;
+
+exports.stagingPresenterURL = process.env.STAGING_PRESENTER_URL;
+exports.stagingContentServiceURL = process.env.STAGING_CONTENT_SERVICE_URL;
+exports.stagingContentServiceAdminAPIKey = process.env.STAGING_ADMIN_API_KEY;
+
 exports.controlRepositoryURL = process.env.CONTROL_REPO_URL;
 exports.controlRepositoryBranch = process.env.CONTROL_REPO_BRANCH || 'master';
 exports.slackWebhookURL = process.env.SLACK_WEBHOOK_URL;

@@ -112,6 +112,9 @@ exports.createControlProject = function (callback) {
           contentServiceURL: config.contentServiceURL,
           contentServiceAdminAPIKey: config.adminAPIKey,
           contentServiceTLSVerify: true,
+          stagingPresenterURL: config.stagingPresenterURL,
+          stagingContentServiceURL: config.stagingContentServiceURL,
+          stagingContentServiceAdminAPIKey: config.stagingContentServiceAdminAPIKey,
           slackWebhookURL: config.slackWebhookURL,
           slackChannel: config.slackChannel,
           verbose: false
