@@ -20,7 +20,7 @@
     "strider-cli": "^1.4.10",
     "strider-custom": "^0.6.0",
     "strider-deconst-content": "^1.1.0",
-    "strider-deconst-control": "^1.1.0",
+    "strider-deconst-control": "^1.1.1",
     "strider-email-notifier": "^0.4.2",
     "strider-env": "^0.5.1",
     "strider-git": "^0.2.4",
