@@ -19,15 +19,15 @@
     "strider-build-badge": "0.1.0",
     "strider-cli": "1.4.10",
     "strider-custom": "0.6.1",
-    "strider-deconst-content": "1.2.0",
-    "strider-deconst-control": "1.2.1",
+    "strider-deconst-content": "1.2.1",
+    "strider-deconst-control": "1.3.0",
     "strider-email-notifier": "0.4.5",
     "strider-env": "0.5.1",
-    "strider-git": "0.2.4",
-    "strider-github": "2.3.0",
+    "strider-git": "0.2.5",
+    "strider-github": "2.3.1",
     "strider-github-oauth": "1.0.6",
     "strider-github-status": "1.0.0",
-    "strider-simple-runner": "0.14.0",
+    "strider-simple-runner": "0.15.0",
     "strider-slack": "2.0.0"
   }
 }
