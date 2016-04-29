@@ -1,6 +1,6 @@
-FROM alpine:3.2
+FROM alpine:3.3
 
-RUN apk add --update nginx && rm -rf /var/cache/apk/*
+RUN apk add --no-cache nginx
 
 # forward request and error logs to docker log collector
 RUN ln -sf /dev/stdout /var/log/nginx/access.log
