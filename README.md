@@ -43,6 +43,10 @@ docker run -d \
 
 This image bundles [Strider CD](https://github.com/Strider-CD/strider) with a controlled set of plugins and build scripts that can build content and control repositories. When launched, it bootstraps Strider with a system user and a project that builds the control repository.
 
+ * [index.js](strider/index.js) implements the entrypoint that bootstraps Strider with a fixed system user account and a set of static plugins. See [the Strider wiki](https://github.com/Strider-CD/strider/wiki/Requiring-Strider) for details about Strider initialization.
+ * [deconst/strider-deconst-content](https://github.com/deconst/strider-deconst-content) is the custom plugin that implements builds for content repositories.
+ * [deconst/strider-deconst-control](https://github.com/deconst/strider-deconst-control) is the plugin that implements the build for control repository, including the creation of content repository builds.
+
 #### Configuration
 
 Mandatory configuration values:
