@@ -1,6 +1,6 @@
-FROM alpine:3.3
+FROM alpine:3.6
 
-RUN apk add --no-cache nodejs python-dev build-base krb5-dev openssh-client git perl
+RUN apk add --no-cache nodejs python-dev build-base krb5-dev openssh-client git perl nodejs-npm
 
 RUN mkdir -p /strider/ /workspace/
 
